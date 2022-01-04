@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM Recorder Basic Example</title>
+  </head>
+  <body>
+    <div id="p">
+      <h1>
+        123
+      </h1>
+      <h2>
+        木头人
+      </h2>
+      <input type="text" name="lname" />
+    </div>
+    <script type="application/javascript" src="/dist/index.js"></script>
+    <script type="application/javascript">
+      const DomRecorder = window['dom-recorder'];
+      console.log('version:: ', DomRecorder.version);
+      const { snapshot } = DomRecorder;
+      window.p = snapshot(document.querySelector('#p'));
+      console.log('999', p);
+
+      const mo = new MutationObserver((mutations) => {
+        mutations.forEach((item) => {
+          console.log(item, 'is mutated');
+        });
+      });
+      mo.observe(document, {
+        childList: true,  // 观察目标子节点的变化，是否有添加或者删除
+        attributes: true, // 观察属性变动
+        characterDataOldValue: true,
+        subtree: true
+      });
+      // document.addEventListener('mousemove', (ev) => {
+      //   console.log(ev.target);
+      // });
+    </script>
+  </body>
+</html>

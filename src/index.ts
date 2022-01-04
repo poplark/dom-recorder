@@ -6,3 +6,5 @@
 const version: string = __VERSION__;
 
 export { version };
+
+export { snapshot } from './snapshot';
